@@ -59,10 +59,10 @@ public class Database {
 
     public static void closeAll() {
         if (statement != null)
-            try { statement.close(); }
+            try { statement.close(); System.out.println("Statement closed"); }
             catch (SQLException ignore) { }
         if (connection != null)
-            try { connection.close(); }
+            try { connection.close(); System.out.println("Connection closed");}
             catch (SQLException ignore) { }
     }
 }

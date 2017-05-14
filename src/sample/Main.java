@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
 
 public class Main extends Application {
 
@@ -19,6 +21,12 @@ public class Main extends Application {
             primaryStage.setTitle("IndProject");
             primaryStage.setScene(new Scene(root, 800, 600));
             primaryStage.show();
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    Database.closeAll();
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,7 +34,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-
         launch(args);
     }
+
+
 }

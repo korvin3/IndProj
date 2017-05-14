@@ -29,19 +29,17 @@ public class Delivery{
         System.out.println("Delivery.findAll");
         deliveries.clear();
         Database database = Database.getDatabase();
-        Connection connection = database.getConnection();
         try {
-            Statement statement = connection.createStatement();
+            Statement statement = database.getStatement();
             ResultSet rs = statement.executeQuery("select * from GET_DELIVERIES");
-
             while (rs.next()) {
                 System.out.println("Cпасибо, Олег Анатольевич");
                 deliveries.add(new Delivery(rs.getInt("id_del"),rs.getString("good_name"),rs.getString("agent_name"),
                         rs.getString("wh_name"), rs.getString("op"), rs.getInt("q"),
                         rs.getString("driver"), rs.getString("status")
                         ));
-            } } catch (SQLException e) { System.out.println("SQLException " + e.getMessage());}
-        Database.closeAll();
+            }
+        } catch (SQLException e) { System.out.println("SQLException " + e.getMessage());}
         return deliveries;
     }
 
