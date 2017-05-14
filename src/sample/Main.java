@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.*;
 import javafx.stage.Stage;
-import java.lang.reflect.*;
-
-import java.sql.Statement;
 
 public class Main extends Application {
 
@@ -25,9 +22,6 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
 

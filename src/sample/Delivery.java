@@ -31,10 +31,6 @@ public class Delivery{
         Database database = Database.getDatabase();
         Connection connection = database.getConnection();
         try {
-            //CallableStatement callableStatement = connection.prepareCall("{ ? = call get_deliveries () }");
-            //callableStatement.registerOutParameter(1, Types.OTHER);
-           // callableStatement.execute();
-           // ResultSet rs = (ResultSet) callableStatement.getObject(1);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from GET_DELIVERIES");
 
