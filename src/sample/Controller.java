@@ -7,8 +7,7 @@ import javafx.fxml.*;
 import java.net.*;
 
 public class Controller {
-
-
+    //DELIVERY
     @FXML
     private TableView<Delivery> deliveryTableView;
     @FXML
@@ -24,6 +23,8 @@ public class Controller {
     @FXML
     private TableColumn<Delivery, String> statusTableColumn;
 
+
+    //AGENT
     @FXML
     private TableView<Agent> agentTableView;
     @FXML
@@ -34,6 +35,14 @@ public class Controller {
     private TableColumn<Agent, String> phoneTableColumn;
     @FXML
     private TableColumn<Agent, Integer> payTableColumn;
+
+    //Good
+    @FXML
+    private TableView<Good> goodTableView;
+    @FXML
+    private TableColumn<Good, String> nomenclatureTableColumn;
+    @FXML
+    private TableColumn<Good, String> measureTableColumn;
 
     public Controller(){}
 
@@ -57,9 +66,13 @@ public class Controller {
         phoneTableColumn.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
         payTableColumn.setCellValueFactory(cellData -> cellData.getValue().payProperty().asObject());
 
+        //Good
+        nomenclatureTableColumn.setCellValueFactory(cellData -> cellData.getValue().nomenclatureProperty());
+        measureTableColumn.setCellValueFactory(cellData -> cellData.getValue().measureProperty());
 
         postDeliveryTableView();
         postAgentTableView();
+        postGoodTableView();
     }
 
     public void postDeliveryTableView(){
@@ -70,6 +83,11 @@ public class Controller {
     public void postAgentTableView(){
         System.out.println("postAgentTableView");
         agentTableView.setItems(Agent.findAll());
+    }
+
+    public void postGoodTableView(){
+        System.out.println("postGoodTableView");
+        goodTableView.setItems(Good.findAll());
     }
 
 

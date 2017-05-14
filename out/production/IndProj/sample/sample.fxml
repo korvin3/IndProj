@@ -59,10 +59,10 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="Goods" layoutX="-61.0" layoutY="-99.0" prefHeight="565.0" prefWidth="632.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="goodTableView" layoutX="-61.0" layoutY="-99.0" prefHeight="565.0" prefWidth="632.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columns>
-                                          <TableColumn prefWidth="105.0" text="Nomenclature" />
-                                          <TableColumn prefWidth="105.0" text="Measure" />
+                                          <TableColumn fx:id="nomenclatureTableColumn" prefWidth="105.0" text="Nomenclature" />
+                                          <TableColumn fx:id="measureTableColumn" prefWidth="105.0" text="Measure" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
