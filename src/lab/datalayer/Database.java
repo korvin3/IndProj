@@ -1,4 +1,4 @@
-package lab;
+package lab.datalayer;
 import java.sql.*;
 
 /**

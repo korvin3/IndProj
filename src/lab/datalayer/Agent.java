@@ -1,4 +1,4 @@
-package lab;
+package lab.datalayer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

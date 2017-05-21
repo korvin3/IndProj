@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import lab.datalayer.Agent;
+import lab.datalayer.Delivery;
+import lab.datalayer.Good;
 
 public class Controller {
     //DELIVERY
