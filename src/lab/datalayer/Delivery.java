@@ -1,23 +1,19 @@
-package lab.datalayer;
-
+package sample;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lab.exception.DatabaseError;
+import javafx.collections.FXCollections;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import static lab.util.CommonUtils.print;
+import java.lang.String;
+import java.sql.DatabaseMetaData;
+import java.sql.*;
 
 /**
  * Created by Korvin on 13.05.2017.
  */
-public class Delivery {
+public class Delivery{
     private final IntegerProperty id;
     private final StringProperty good;
     private final StringProperty agent;
@@ -26,28 +22,33 @@ public class Delivery {
     private final IntegerProperty quantity;
     private final StringProperty driver;
     private final StringProperty status;
+    private static ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
 
-    public static ObservableList<Delivery> findAll() {
-        print("Delivery.findAll");
-        ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
-        Database database = Database.getInstance();
+
+    public static ObservableList<Delivery> findAll(){
+        System.out.println("Delivery.findAll");
+        deliveries.clear();
+        Database database = Database.getDatabase();
         try {
             Statement statement = database.getStatement();
-            ResultSet rs = statement.executeQuery("select * from GET_DELIVERIES");
+            ResultSet rs = statement.executeQuery("select * from VIEW_DELIVERIES");
             while (rs.next()) {
-                print("Cпасибо, Олег Анатольевич");
-                deliveries.add(new Delivery(rs.getInt("id_del"), rs.getString("good_name"), rs.getString("agent_name"),
-                        rs.getString("wh_name"), rs.getString("op"), rs.getInt("q"),
-                        rs.getString("driver"), rs.getString("status")
-                ));
+                System.out.println("Cпасибо, Олег Анатольевич");
+                String type_op = rs.getString("TYPEOP");
+                if (type_op.equals("A")) type_op="На склад"; else type_op="Со склада";
+                String stat = rs.getString("status");
+                if (stat.equals("S")) stat="В пути"; else if(stat.equals("C")) stat="Отказ"; else stat="Доставлено";
+
+                deliveries.add(new Delivery(rs.getInt("id"),rs.getString("NOMENCLATURE"),rs.getString("NAME_AG"),
+                        rs.getString("name"), type_op, rs.getInt("QUANTITY"),
+                        rs.getString("driver"), stat
+                        ));
             }
-        } catch (SQLException e) {
-            throw new DatabaseError(e);
-        }
+        } catch (SQLException e) { System.out.println("SQLException " + e.getMessage());}
         return deliveries;
     }
 
-    private Delivery(int _id, String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, String _status) {
+    private Delivery(int _id, String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, String _status){
         id = new SimpleIntegerProperty(_id);
         this.good = new SimpleStringProperty(_good);
         agent = new SimpleStringProperty(_agent);
@@ -58,6 +59,38 @@ public class Delivery {
         status = new SimpleStringProperty(_status);
     }
 
+
+    //создание новое доставки
+    public static int Create(String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, int _price, String pre_time){
+        Database db = Database.getDatabase();
+        try {
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement("{call checkout(?, ?, ?, ?, ?, ?, ?, ?)}");
+            preparedStatement.setString(1, _warehouse);
+            preparedStatement.setString(2, _good);
+            preparedStatement.setString(3, _agent);
+            preparedStatement.setString(4, _type);
+            preparedStatement.setInt(5, _quantity);
+            preparedStatement.setString(6, _driver);
+            preparedStatement.setString(7, pre_time);
+            preparedStatement.setInt(8, _price);
+            preparedStatement.execute();
+        } catch (SQLException e) { System.out.println("SQLException " + e.getMessage()); return 1;}
+        return 0;
+    }
+
+
+    //закрытие доставки через изменение статуса на доставлено("D") или возврат("C")
+    public int Delivered(String _status){
+        Database db = Database.getDatabase();
+        String query;
+        if (_status=="D") query = "call delivered(?)"; else query = "call cancel_delivery(?)";
+        try {
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, this.id.toString());
+            preparedStatement.execute();
+        } catch (SQLException e) { System.out.println("SQLException " + e.getMessage()); return 1;}
+        return 0;
+    }
 
     public String getGood() {
         return good.get();
@@ -70,6 +103,7 @@ public class Delivery {
     public StringProperty goodProperty() {
         return good;
     }
+
 
 
     public String getAgent() {
@@ -85,6 +119,7 @@ public class Delivery {
     }
 
 
+
     public String getWarehouse() {
         return warehouse.get();
     }
@@ -96,6 +131,7 @@ public class Delivery {
     public StringProperty warehouseProperty() {
         return warehouse;
     }
+
 
 
     public String getType() {
@@ -111,6 +147,7 @@ public class Delivery {
     }
 
 
+
     public String getDriver() {
         return driver.get();
     }
@@ -122,6 +159,7 @@ public class Delivery {
     public StringProperty driverProperty() {
         return driver;
     }
+
 
 
     public String getStatus() {
@@ -137,6 +175,7 @@ public class Delivery {
     }
 
 
+
     public int getId() {
         return id.get();
     }
@@ -150,6 +189,7 @@ public class Delivery {
     }
 
 
+
     public int getQuantity() {
         return quantity.get();
     }
@@ -161,4 +201,7 @@ public class Delivery {
     public IntegerProperty quantityProperty() {
         return quantity;
     }
+
+
+
 }

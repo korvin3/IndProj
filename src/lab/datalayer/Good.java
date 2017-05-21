@@ -26,7 +26,7 @@ public class Good {
         Database database = Database.getInstance();
         try {
             Statement statement = database.getStatement();
-            ResultSet rs = statement.executeQuery("select * from GET_GOODS");
+            ResultSet rs = statement.executeQuery("select * from VIEW_GOODS");
             while (rs.next()) {
                 print("Cпасибо, Олег Анатольевич");
                 goods.add(new Good(rs.getString("id_goods"), rs.getString("nomenclature"), rs.getString("measure")));
@@ -42,7 +42,6 @@ public class Good {
         nomenclature = new SimpleStringProperty(_nomenclature);
         measure = new SimpleStringProperty(_measure);
     }
-
 
     public String getNomenclature() {
         return nomenclature.get();

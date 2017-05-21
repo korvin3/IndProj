@@ -30,7 +30,7 @@ public class Agent {
         Database database = Database.getInstance();
         try {
             Statement statement = database.getStatement();
-            ResultSet rs = statement.executeQuery("select * from GET_AGENTS");
+            ResultSet rs = statement.executeQuery("select * from VIEW_AGENTS");
             while (rs.next()) {
                 print("Cпасибо, Олег Анатольевич");
                 agents.add(new Agent(rs.getString("id_ag"), rs.getString("name_ag"), rs.getString("town"),
