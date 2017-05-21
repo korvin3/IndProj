@@ -1,4 +1,4 @@
-package sample;
+package lab;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
 import java.lang.String;
-import java.sql.DatabaseMetaData;
 import java.sql.*;
 
 /**

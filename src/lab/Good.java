@@ -1,13 +1,10 @@
-package sample;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+package lab;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
 import java.lang.String;
-import java.sql.DatabaseMetaData;
 import java.sql.*;
 
 /**

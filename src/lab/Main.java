@@ -1,4 +1,4 @@
-package sample;
+package lab;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("lab.fxml"));
             loader.setController(new Controller());
             Parent root = loader.load();
             primaryStage.setTitle("IndProject");

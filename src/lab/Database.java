@@ -1,7 +1,5 @@
-package sample;
+package lab;
 import java.sql.*;
-import java.io.*;
-import java.util.*;
 
 /**
  * Created by Korvin on 13.05.2017.
