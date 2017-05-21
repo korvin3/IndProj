@@ -25,7 +25,7 @@ public class Database {
     public Connection getConnection(){
         if(connection==null) {
             String driver = "org.firebirdsql.jdbc.FBDriver";
-            String url = "jdbc:firebirdsql:class.mmcs.sfedu.ru/3050:/fbdata/38/zinchenko.fdb ?encoding=UNICODE_FSS";
+            String url = "jdbc:firebirdsql:class.mmcs.sfedu.ru/3050:/fbdata/38/OgnevZinchenko.fdb ?encoding=UNICODE_FSS";
             String user = "IT38";
             String password = "it38";
 

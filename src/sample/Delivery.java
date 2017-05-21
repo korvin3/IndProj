@@ -31,12 +31,17 @@ public class Delivery{
         Database database = Database.getDatabase();
         try {
             Statement statement = database.getStatement();
-            ResultSet rs = statement.executeQuery("select * from GET_DELIVERIES");
+            ResultSet rs = statement.executeQuery("select * from VIEW_DELIVERIES");
             while (rs.next()) {
                 System.out.println("Cпасибо, Олег Анатольевич");
-                deliveries.add(new Delivery(rs.getInt("id_del"),rs.getString("good_name"),rs.getString("agent_name"),
-                        rs.getString("wh_name"), rs.getString("op"), rs.getInt("q"),
-                        rs.getString("driver"), rs.getString("status")
+                String type_op = rs.getString("TYPEOP");
+                if (type_op.equals("A")) type_op="На склад"; else type_op="Со склада";
+                String stat = rs.getString("status");
+                if (stat.equals("S")) stat="В пути"; else if(stat.equals("C")) stat="Отказ"; else stat="Доставлено";
+
+                deliveries.add(new Delivery(rs.getInt("id"),rs.getString("NOMENCLATURE"),rs.getString("NAME_AG"),
+                        rs.getString("name"), type_op, rs.getInt("QUANTITY"),
+                        rs.getString("driver"), stat
                         ));
             }
         } catch (SQLException e) { System.out.println("SQLException " + e.getMessage());}
@@ -54,6 +59,22 @@ public class Delivery{
         status = new SimpleStringProperty(_status);
     }
 
+    public int Create(String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, int _price, String pre_time){
+        Database db = Database.getDatabase();
+        try {
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement("{call checkout(?, ?, ?, ?, ?, ?, ?, ?)}");
+            preparedStatement.setString(1, _warehouse);
+            preparedStatement.setString(2, _good);
+            preparedStatement.setString(3, _agent);
+            preparedStatement.setString(4, _type);
+            preparedStatement.setInt(5, _quantity);
+            preparedStatement.setString(6, _driver);
+            preparedStatement.setString(7, pre_time);
+            preparedStatement.setInt(8, _price);
+            preparedStatement.execute();
+        } catch (SQLException e) { System.out.println("SQLException " + e.getMessage()); return 1;}
+        return 0;
+    }
 
     public String getGood() {
         return good.get();

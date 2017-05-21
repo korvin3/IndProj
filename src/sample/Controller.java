@@ -57,7 +57,7 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        // Инициализация таблицы адресатов с двумя столбцами.
+
         System.out.println("initialize");
 
         //Delivery
@@ -105,9 +105,6 @@ public class Controller {
         postGoodTableView();
         postAgentTableView();
         postDeliveryTableView();
-
     }
-
-
 
 }

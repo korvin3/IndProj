@@ -28,7 +28,7 @@ public class Agent{
         Database database = Database.getDatabase();
         try {
             Statement statement = database.getStatement();
-            ResultSet rs = statement.executeQuery("select * from GET_AGENTS");
+            ResultSet rs = statement.executeQuery("select * from VIEW_AGENTS");
             while (rs.next()) {
                 System.out.println("Cпасибо, Олег Анатольевич");
                 agents.add(new Agent(rs.getString("id_ag"),rs.getString("name_ag"),rs.getString("town"),
