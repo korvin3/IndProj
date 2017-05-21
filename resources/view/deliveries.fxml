@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lab.controller.DeliveriesController">
+    <center>
+        <TableView fx:id="deliveriesTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="goodColumn" prefWidth="100.0" text="Good" />
+                <TableColumn fx:id="agentColumn" prefWidth="100.0" text="Agent" />
+                <TableColumn fx:id="warehouseColumn" prefWidth="100.0" text="Warehouse" />
+                <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Type" />
+                <TableColumn fx:id="quantityColumn" prefWidth="100.0" text="Quantity" />
+                <TableColumn fx:id="driverColumn" prefWidth="100.0" text="Driver" />
+                <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
+            </columns>
+        </TableView>
+    </center>
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="&lt;- Back" />
+            <Button fx:id="deliverBtn" disable="true" mnemonicParsing="false" onAction="#deliver" text="Mark as delivered">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="cancelBtn" disable="true" mnemonicParsing="false" onAction="#cancelDeliver" text="Cancel">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+            </children>
+            <padding>
+                <Insets left="5.0" />
+            </padding>
+        </HBox>
+    </top>
+</BorderPane>

@@ -17,7 +17,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent home = FXUtils.loadView("/view/home.fxml", primaryStage);
         primaryStage.setTitle("Shop");
-        primaryStage.setScene(new Scene(home, 600, 600));
+        primaryStage.setScene(new Scene(home, 850, 650));
         primaryStage.show();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override

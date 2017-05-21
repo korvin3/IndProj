@@ -14,6 +14,13 @@ import java.io.IOException;
  */
 public class FXUtils {
     /**
+     * Warning! Use this method with cautious.
+     */
+    public static void setCurrentView(View view) {
+        Main.getMainStage().getScene().setRoot(loadView(view));
+    }
+
+    /**
      * Main stage will be used by default.
      * See {@link Main#getMainStage()}
      */

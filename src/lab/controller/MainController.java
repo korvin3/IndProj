@@ -7,6 +7,9 @@ import javafx.scene.control.TableView;
 import lab.datalayer.Agent;
 import lab.datalayer.Delivery;
 import lab.datalayer.Good;
+import lab.service.AgentService;
+import lab.service.DeliveryService;
+import lab.service.GoodService;
 
 import static lab.util.CommonUtils.print;
 
@@ -85,17 +88,17 @@ public class MainController extends FXController {
 
     public void postDeliveryTableView() {
         print("postDeliveryTableView");
-        deliveryTableView.setItems(Delivery.findAll());
+        deliveryTableView.setItems(DeliveryService.findAll());
     }
 
     public void postAgentTableView() {
         print("postAgentTableView");
-        agentTableView.setItems(Agent.findAll());
+        agentTableView.setItems(AgentService.findAll());
     }
 
     public void postGoodTableView() {
         print("postGoodTableView");
-        goodTableView.setItems(Good.findAll());
+        goodTableView.setItems(GoodService.findAll());
     }
 
     @FXML

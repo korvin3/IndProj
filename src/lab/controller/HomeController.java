@@ -1,10 +1,8 @@
 package lab.controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import lab.View;
-import lab.util.CommonUtils;
 import lab.util.FXUtils;
 
 /**
@@ -14,29 +12,25 @@ public class HomeController extends FXController {
     public Button newOrderBtn;
     public Button goodsBtn;
     public Button agentsBtn;
-    public Button ordersBtn;
-    public Button reportsBtn;
     public Button mainDevBtn;
+    public Button deliveriesBtn;
 
     public void showNewOrder(ActionEvent actionEvent) {
+        FXUtils.setCurrentView(View.NewDelivery);
     }
 
     public void showGoods(ActionEvent actionEvent) {
-        CommonUtils.print("showing goods view...");
-        Parent goods = FXUtils.loadView(View.Goods);
-        getStage().getScene().setRoot(goods);
+        FXUtils.setCurrentView(View.Goods);
     }
 
     public void showAgents(ActionEvent actionEvent) {
     }
 
-    public void showOrders(ActionEvent actionEvent) {
-    }
-
-    public void showReports(ActionEvent actionEvent) {
-    }
-
     public void showMain(ActionEvent actionEvent) {
-        getStage().getScene().setRoot(FXUtils.loadView(View.Main));
+        FXUtils.setCurrentView(View.Main);
+    }
+
+    public void showDeliveries(ActionEvent actionEvent) {
+        FXUtils.setCurrentView(View.Deliveries);
     }
 }

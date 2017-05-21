@@ -9,34 +9,29 @@
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="newOrderBtn" disable="true" mnemonicParsing="false" onAction="#showNewOrder" prefHeight="30.0" prefWidth="150.0" text="New order">
+                <Button fx:id="newOrderBtn" mnemonicParsing="false" onAction="#showNewOrder" prefHeight="30.0" prefWidth="150.0" text="New delivery">
                     <VBox.margin>
                         <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="deliveriesBtn" mnemonicParsing="false" onAction="#showDeliveries" prefHeight="30.0" prefWidth="150.0" text="Deliveries">
+                    <VBox.margin>
+                        <Insets top="5.0" />
                     </VBox.margin>
                 </Button>
                 <Button fx:id="goodsBtn" mnemonicParsing="false" onAction="#showGoods" prefHeight="30.0" prefWidth="150.0" text="Goods">
                     <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="15.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="agentsBtn" disable="true" mnemonicParsing="false" onAction="#showAgents" prefHeight="30.0" prefWidth="150.0" text="Agents">
+                <Button fx:id="agentsBtn" mnemonicParsing="false" onAction="#showAgents" prefHeight="30.0" prefWidth="150.0" text="Agents">
                     <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="ordersBtn" disable="true" mnemonicParsing="false" onAction="#showOrders" prefHeight="30.0" prefWidth="150.0" text="Orders">
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="reportsBtn" disable="true" mnemonicParsing="false" onAction="#showReports" prefHeight="30.0" prefWidth="150.0" text="Reports">
-                    <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="5.0" />
                     </VBox.margin>
                 </Button>
             <Button fx:id="mainDevBtn" mnemonicParsing="false" onAction="#showMain" prefHeight="30.0" prefWidth="150.0" text="Main (DEV)">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </Button>
             </children>
