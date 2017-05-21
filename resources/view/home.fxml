@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lab.controller.HomeController">
+    <center>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="newOrderBtn" disable="true" mnemonicParsing="false" onAction="#showNewOrder" prefHeight="30.0" prefWidth="150.0" text="New order">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="goodsBtn" mnemonicParsing="false" onAction="#showGoods" prefHeight="30.0" prefWidth="150.0" text="Goods">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="agentsBtn" disable="true" mnemonicParsing="false" onAction="#showAgents" prefHeight="30.0" prefWidth="150.0" text="Agents">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="ordersBtn" disable="true" mnemonicParsing="false" onAction="#showOrders" prefHeight="30.0" prefWidth="150.0" text="Orders">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="reportsBtn" disable="true" mnemonicParsing="false" onAction="#showReports" prefHeight="30.0" prefWidth="150.0" text="Reports">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+            <Button fx:id="mainDevBtn" mnemonicParsing="false" onAction="#showMain" prefHeight="30.0" prefWidth="150.0" text="Main (DEV)">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

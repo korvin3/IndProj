@@ -1,42 +1,38 @@
 package lab;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import java.io.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.event.EventHandler;
 import lab.datalayer.Database;
+import lab.util.FXUtils;
 
 public class Main extends Application {
 
+    private static Stage mainStage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main.fxml"));
-            loader.setController(new Controller());
-            Parent root = loader.load();
-            primaryStage.setTitle("IndProject");
-            primaryStage.setScene(new Scene(root, 800, 600));
-            primaryStage.show();
-            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    Database.cleanUp();
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void start(Stage primaryStage) throws Exception {
+        Parent home = FXUtils.loadView("/view/home.fxml", primaryStage);
+        primaryStage.setTitle("Shop");
+        primaryStage.setScene(new Scene(home, 600, 600));
+        primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Database.cleanUp();
+            }
+        });
+        mainStage = primaryStage;
     }
-
 
     public static void main(String[] args) {
         launch(args);
     }
 
-
+    public static Stage getMainStage() {
+        return mainStage;
+    }
 }

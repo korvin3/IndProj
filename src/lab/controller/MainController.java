@@ -1,4 +1,4 @@
-package lab;
+package lab.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +10,7 @@ import lab.datalayer.Good;
 
 import static lab.util.CommonUtils.print;
 
-public class Controller {
+public class MainController extends FXController {
     //DELIVERY
     @FXML
     private TableView<Delivery> deliveryTableView;
@@ -52,12 +52,11 @@ public class Controller {
     @FXML
     private Button refreshButton;
 
-    public Controller() {
+    public MainController() {
     }
 
-    @FXML
+    @Override
     public void initialize() {
-        // Инициализация таблицы адресатов с двумя столбцами.
         print("initialize");
 
         //Delivery
@@ -105,8 +104,5 @@ public class Controller {
         postGoodTableView();
         postAgentTableView();
         postDeliveryTableView();
-
     }
-
-
 }
