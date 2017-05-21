@@ -1,18 +1,23 @@
 package lab.datalayer;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import lab.exception.DatabaseError;
 
-import java.lang.String;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import static lab.util.CommonUtils.print;
 
 /**
  * Created by Korvin on 13.05.2017.
  */
-public class Delivery{
+public class Delivery {
     private final IntegerProperty id;
     private final StringProperty good;
     private final StringProperty agent;
@@ -21,28 +26,28 @@ public class Delivery{
     private final IntegerProperty quantity;
     private final StringProperty driver;
     private final StringProperty status;
-    private static ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
 
-
-    public static ObservableList<Delivery> findAll(){
-        System.out.println("Delivery.findAll");
-        deliveries.clear();
-        Database database = Database.getDatabase();
+    public static ObservableList<Delivery> findAll() {
+        print("Delivery.findAll");
+        ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
+        Database database = Database.getInstance();
         try {
             Statement statement = database.getStatement();
             ResultSet rs = statement.executeQuery("select * from GET_DELIVERIES");
             while (rs.next()) {
-                System.out.println("Cпасибо, Олег Анатольевич");
-                deliveries.add(new Delivery(rs.getInt("id_del"),rs.getString("good_name"),rs.getString("agent_name"),
+                print("Cпасибо, Олег Анатольевич");
+                deliveries.add(new Delivery(rs.getInt("id_del"), rs.getString("good_name"), rs.getString("agent_name"),
                         rs.getString("wh_name"), rs.getString("op"), rs.getInt("q"),
                         rs.getString("driver"), rs.getString("status")
-                        ));
+                ));
             }
-        } catch (SQLException e) { System.out.println("SQLException " + e.getMessage());}
+        } catch (SQLException e) {
+            throw new DatabaseError(e);
+        }
         return deliveries;
     }
 
-    private Delivery(int _id, String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, String _status){
+    private Delivery(int _id, String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, String _status) {
         id = new SimpleIntegerProperty(_id);
         this.good = new SimpleStringProperty(_good);
         agent = new SimpleStringProperty(_agent);
@@ -67,7 +72,6 @@ public class Delivery{
     }
 
 
-
     public String getAgent() {
         return agent.get();
     }
@@ -79,7 +83,6 @@ public class Delivery{
     public StringProperty agentProperty() {
         return agent;
     }
-
 
 
     public String getWarehouse() {
@@ -95,7 +98,6 @@ public class Delivery{
     }
 
 
-
     public String getType() {
         return type.get();
     }
@@ -107,7 +109,6 @@ public class Delivery{
     public StringProperty typeProperty() {
         return type;
     }
-
 
 
     public String getDriver() {
@@ -123,7 +124,6 @@ public class Delivery{
     }
 
 
-
     public String getStatus() {
         return status.get();
     }
@@ -135,7 +135,6 @@ public class Delivery{
     public StringProperty statusProperty() {
         return status;
     }
-
 
 
     public int getId() {
@@ -151,7 +150,6 @@ public class Delivery{
     }
 
 
-
     public int getQuantity() {
         return quantity.get();
     }
@@ -163,7 +161,4 @@ public class Delivery{
     public IntegerProperty quantityProperty() {
         return quantity;
     }
-
-
-
 }

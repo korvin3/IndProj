@@ -1,11 +1,16 @@
 package lab.datalayer;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import lab.exception.DatabaseError;
 
-import java.lang.String;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import static lab.util.CommonUtils.print;
 
 /**
  * Created by Korvin on 13.05.2017.
@@ -15,22 +20,19 @@ public class Good {
     private final StringProperty nomenclature;
     private final StringProperty measure;
 
-    private static ObservableList<Good> goods = FXCollections.observableArrayList();
-
-
     public static ObservableList<Good> findAll() {
-        System.out.println("Good.findAll");
-        goods.clear();
-        Database database = Database.getDatabase();
+        print("Good.findAll");
+        ObservableList<Good> goods = FXCollections.observableArrayList();
+        Database database = Database.getInstance();
         try {
             Statement statement = database.getStatement();
             ResultSet rs = statement.executeQuery("select * from GET_GOODS");
             while (rs.next()) {
-                System.out.println("Cпасибо, Олег Анатольевич");
+                print("Cпасибо, Олег Анатольевич");
                 goods.add(new Good(rs.getString("id_goods"), rs.getString("nomenclature"), rs.getString("measure")));
             }
         } catch (SQLException e) {
-            System.out.println("SQLException " + e.getMessage());
+            throw new DatabaseError(e);
         }
         return goods;
     }

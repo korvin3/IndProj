@@ -8,6 +8,8 @@ import lab.datalayer.Agent;
 import lab.datalayer.Delivery;
 import lab.datalayer.Good;
 
+import static lab.util.CommonUtils.print;
+
 public class Controller {
     //DELIVERY
     @FXML
@@ -50,12 +52,13 @@ public class Controller {
     @FXML
     private Button refreshButton;
 
-    public Controller(){}
+    public Controller() {
+    }
 
     @FXML
     public void initialize() {
         // Инициализация таблицы адресатов с двумя столбцами.
-        System.out.println("initialize");
+        print("initialize");
 
         //Delivery
         goodTableColumn.setCellValueFactory(cellData -> cellData.getValue().goodProperty());
@@ -81,18 +84,18 @@ public class Controller {
         postGoodTableView();
     }
 
-    public void postDeliveryTableView(){
-        System.out.println("postDeliveryTableView");
+    public void postDeliveryTableView() {
+        print("postDeliveryTableView");
         deliveryTableView.setItems(Delivery.findAll());
     }
 
-    public void postAgentTableView(){
-        System.out.println("postAgentTableView");
+    public void postAgentTableView() {
+        print("postAgentTableView");
         agentTableView.setItems(Agent.findAll());
     }
 
-    public void postGoodTableView(){
-        System.out.println("postGoodTableView");
+    public void postGoodTableView() {
+        print("postGoodTableView");
         goodTableView.setItems(Good.findAll());
     }
 
@@ -104,7 +107,6 @@ public class Controller {
         postDeliveryTableView();
 
     }
-
 
 
 }

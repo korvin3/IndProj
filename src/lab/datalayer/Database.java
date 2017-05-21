@@ -1,66 +1,78 @@
 package lab.datalayer;
-import java.sql.*;
+
+import lab.exception.DatabaseError;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import static lab.util.CommonUtils.print;
 
 /**
  * Created by Korvin on 13.05.2017.
  */
 public class Database {
-    private static Database database;
-    private static Connection connection ;
+
+    private static final Database database = new Database();
+
+    private static Connection connection;
     private static Statement statement;
 
-    private Database(){
+    private final Properties properties = new Properties();
 
+    private Database() {
+        try {
+            properties.load(getClass().getClassLoader().getResourceAsStream("database/database.prop"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static Database getDatabase(){
-        if(database==null){
-            database= new Database();
-        }
+    public static Database getInstance() {
         return database;
     }
 
-    public Connection getConnection(){
-        if(connection==null) {
-            String driver = "org.firebirdsql.jdbc.FBDriver";
-            String url = "jdbc:firebirdsql:class.mmcs.sfedu.ru/3050:/fbdata/38/zinchenko.fdb ?encoding=UNICODE_FSS";
-            String user = "IT38";
-            String password = "it38";
+    public Connection getConnection() {
+        if (connection == null) {
+            String driver = properties.getProperty("driver");
+            String url = properties.getProperty("url");
+            String user = properties.getProperty("user");
+            String password = properties.getProperty("password");
 
             try {
                 Class.forName(driver);
-                System.out.println("OK");
+                print("Firebird JDBC driver class found");
                 connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Connect");
+                print("connection successfully obtained");
             } catch (ClassNotFoundException e) {
-                System.out.println("Firebird JDBC driver not found");
-            } catch (SQLException e) {
-                System.out.println("SQLException " + e.getMessage());
+                throw new DatabaseError("Firebird JDBC driver not found", e);
             } catch (Exception e) {
-                System.out.println("Exception " + e.getMessage());
+                throw new DatabaseError(e);
             }
         }
         return connection;
     }
 
-    public Statement getStatement(){
+    public Statement getStatement() {
         if (statement == null) {
-            if (connection == null) connection = getConnection();
             try {
-                statement = connection.createStatement();
+                statement = getConnection().createStatement();
             } catch (SQLException e) {
-                System.out.println("SQLException " + e.getMessage());
+                throw new DatabaseError(e);
             }
         }
         return statement;
     }
 
-    public static void closeAll() {
-        if (statement != null)
-            try { statement.close(); System.out.println("Statement closed"); }
-            catch (SQLException ignore) { }
+    public static void cleanUp() {
         if (connection != null)
-            try { connection.close(); System.out.println("Connection closed");}
-            catch (SQLException ignore) { }
+            try {
+                connection.close();
+                print("connection closed");
+            } catch (SQLException e) {
+                throw new DatabaseError(e);
+            }
     }
 }

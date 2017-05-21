@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("lab.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main.fxml"));
             loader.setController(new Controller());
             Parent root = loader.load();
             primaryStage.setTitle("IndProject");
@@ -25,7 +25,7 @@ public class Main extends Application {
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
-                    Database.closeAll();
+                    Database.cleanUp();
                 }
             });
         } catch (IOException e) {
