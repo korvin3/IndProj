@@ -59,7 +59,9 @@ public class Delivery{
         status = new SimpleStringProperty(_status);
     }
 
-    public int Create(String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, int _price, String pre_time){
+
+    //создание новое доставки
+    public static int Create(String _good, String _agent, String _warehouse, String _type, int _quantity, String _driver, int _price, String pre_time){
         Database db = Database.getDatabase();
         try {
             PreparedStatement preparedStatement = db.getConnection().prepareStatement("{call checkout(?, ?, ?, ?, ?, ?, ?, ?)}");
@@ -71,6 +73,20 @@ public class Delivery{
             preparedStatement.setString(6, _driver);
             preparedStatement.setString(7, pre_time);
             preparedStatement.setInt(8, _price);
+            preparedStatement.execute();
+        } catch (SQLException e) { System.out.println("SQLException " + e.getMessage()); return 1;}
+        return 0;
+    }
+
+
+    //закрытие доставки через изменение статуса на доставлено("D") или возврат("C")
+    public int Delivered(String _status){
+        Database db = Database.getDatabase();
+        String query;
+        if (_status=="D") query = "call delivered(?)"; else query = "call cancel_delivery(?)";
+        try {
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, this.id.toString());
             preparedStatement.execute();
         } catch (SQLException e) { System.out.println("SQLException " + e.getMessage()); return 1;}
         return 0;
