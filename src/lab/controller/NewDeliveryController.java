@@ -3,6 +3,7 @@ package lab.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -71,8 +72,8 @@ public class NewDeliveryController extends FXController {
 
     public void createDelivery(ActionEvent actionEvent) {
         try {
-            checkQuantity();
             checkValues();
+            checkQuantity();
         } catch (IllegalArgumentException e) {
             return;
         }
@@ -88,6 +89,18 @@ public class NewDeliveryController extends FXController {
     }
 
     private void checkQuantity() {
+        if (DeliveryType.FromWarehouse == typeCb.getValue()) {
+            Warehouse warehouse = warehouseCb.getValue();
+            Good good = goodCb.getValue();
+            int remainingQuantity = WarehouseService.findGoodsQuantity(warehouse, good);
+            int deliverQuantity = toInt(quantityTf.getText());
+            if (deliverQuantity > remainingQuantity) {
+                String msg = "delivery quantity is invalid\n"
+                        + "remaining quantity is " + remainingQuantity;
+                new Alert(Alert.AlertType.WARNING, msg).show();
+                throw new IllegalArgumentException("invalid quantity (too big)");
+            }
+        }
     }
 
     private void checkValues() {

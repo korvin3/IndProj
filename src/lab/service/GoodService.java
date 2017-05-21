@@ -24,8 +24,9 @@ public class GoodService {
             ResultSet rs = statement.executeQuery("select * from VIEW_GOODS");
             while (rs.next()) {
                 print("Cпасибо, Олег Анатольевич");
-                goods.add(new Good(rs.getString("id_goods"), rs.getString("nomenclature"),
-                        rs.getString("measure")));
+                goods.add(new Good(rs.getString("id_goods").trim(),
+                        rs.getString("nomenclature").trim(),
+                        rs.getString("measure").trim()));
             }
         } catch (SQLException e) {
             throw new DatabaseError(e);
