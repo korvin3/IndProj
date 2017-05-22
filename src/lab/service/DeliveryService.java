@@ -101,13 +101,16 @@ public class DeliveryService {
             ps.setString(3, status.value());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                if (rs.getString("NOMENCLATURE") == null) {
+                    return deliveries;
+                }
                 deliveries.add(new Delivery(rs.getInt("ID"),
-                        rs.getString("NOMENCLATURE"),
-                        rs.getString("NAME_AG"),
-                        rs.getString("NAME"),
+                        rs.getString("NOMENCLATURE").trim(),
+                        rs.getString("NAME_AG").trim(),
+                        rs.getString("NAME").trim(),
                         null,
                         rs.getInt("quantity"),
-                        rs.getString("DRIVER"),
+                        rs.getString("DRIVER").trim(),
                         status.toString(),
                         rs.getTimestamp("ARR_DATE")));
             }

@@ -2,6 +2,7 @@ package lab.controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import lab.GoodsReportGenerator;
 import lab.View;
 import lab.util.FXUtils;
 
@@ -14,6 +15,12 @@ public class HomeController extends FXController {
     public Button agentsBtn;
     public Button mainDevBtn;
     public Button deliveriesBtn;
+
+    @Override
+    public void initialize() {
+        super.initialize();
+//        GoodsReportGenerator.generate();
+    }
 
     public void showNewOrder(ActionEvent actionEvent) {
         FXUtils.setCurrentView(View.NewDelivery);
