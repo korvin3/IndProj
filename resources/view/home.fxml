@@ -29,6 +29,11 @@
                         <Insets top="5.0" />
                     </VBox.margin>
                 </Button>
+            <Button fx:id="generateReportBtn" mnemonicParsing="false" onAction="#generateGoodsReport" prefHeight="30.0" prefWidth="150.0" text="Generate goods report">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Button>
             </children>
         </VBox>
     </center>

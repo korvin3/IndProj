@@ -94,7 +94,7 @@ public class DeliveryService {
     public static ObservableList<Delivery> find(DeliveryStatus status, LocalDate dateFrom, LocalDate dateTo) {
         ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
         try {
-            String query = "{call get_deliveries_by_status(?,?,?)}";
+            String query = "select * from get_deliveries_by_status(?,?,?)";
             PreparedStatement ps = Database.getInstance().getConnection().prepareStatement(query);
             ps.setTimestamp(1, Timestamp.valueOf(dateFrom.atStartOfDay()));
             ps.setTimestamp(2, Timestamp.valueOf(dateTo.atStartOfDay()));

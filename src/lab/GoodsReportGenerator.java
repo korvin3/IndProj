@@ -4,9 +4,9 @@ import lab.datalayer.Database;
 import lab.exception.DatabaseError;
 import lab.util.CommonUtils;
 
+import java.io.FileOutputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +14,13 @@ import java.util.List;
  * Created by Roman Kolesnik on 22.05.2017.
  */
 public class GoodsReportGenerator {
-    private static class Row {
+    private static class TableRow {
         private String nomenclature;
         private String name;
         private Integer quantity;
-        private String reserve;
+        private Integer reserve;
 
-        public Row(String nomenclature, String name, Integer quantity, String reserve) {
+        public TableRow(String nomenclature, String name, Integer quantity, Integer reserve) {
             this.nomenclature = nomenclature;
             this.name = name;
             this.quantity = quantity;
@@ -34,17 +34,33 @@ public class GoodsReportGenerator {
             PreparedStatement ps = Database.getInstance().getConnection()
                     .prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            List<Row> rows = new ArrayList<>();
+            List<TableRow> rows = new ArrayList<>();
             while (rs.next()) {
-                rows.add(new Row(
-                        rs.getString("NOMENCLATURE,"),
-                        rs.getString("NAME,"),
-                        rs.getInt("QUANTITY,"),
-                        rs.getString("RESERVED")
+                rows.add(new TableRow(
+                        rs.getString("NOMENCLATURE").trim(),
+                        rs.getString("NAME").trim(),
+                        rs.getInt("QUANTITY"),
+                        rs.getInt("RESERVED")
                 ));
             }
             CommonUtils.print(rows.size());
-        } catch (SQLException e) {
+
+            StringBuilder csv = new StringBuilder("NOMENCLATURE,NAME,QUANTITY,RESERVED\n");
+            for (TableRow row : rows) {
+                csv
+                        .append("\"").append(row.nomenclature).append("\",")
+                        .append("\"").append(row.name).append("\",")
+                        .append(row.quantity).append(",")
+                        .append(row.reserve).append("\n");
+            }
+
+            FileOutputStream fileOutputStream = new FileOutputStream("result.csv");
+            fileOutputStream.write(csv.toString().getBytes());
+            fileOutputStream.close();
+
+            CommonUtils.print("done");
+
+        } catch (Exception e) {
             throw new DatabaseError(e);
         }
     }

@@ -95,6 +95,10 @@ public class NewDeliveryController extends FXController {
                 new Alert(Alert.AlertType.WARNING, "provided quantity is too big").show();
                 quantityTf.requestFocus();
                 return;
+            } else if (cause.toString().contains("GOODNOTFOUND")) {
+                new Alert(Alert.AlertType.WARNING, "warehouse doesn't have such goods").show();
+                goodCb.requestFocus();
+                return;
             } else throw e;
         }
         FXUtils.setCurrentView(View.Deliveries);
