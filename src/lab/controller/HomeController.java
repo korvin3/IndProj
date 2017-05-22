@@ -10,7 +10,7 @@ import lab.util.FXUtils;
 import java.io.File;
 
 /**
- * Created by Roman Kolesnik on 21.05.2017.
+ * Created by Kristina Riadchenko on 21.05.2017.
  */
 public class HomeController extends FXController {
     public Button newOrderBtn;

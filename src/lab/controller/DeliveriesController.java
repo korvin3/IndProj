@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
- * Created by Roman Kolesnik on 22.05.2017.
+ * Created by Kristina Riadchenko on 22.05.2017.
  */
 public class DeliveriesController extends FXController {
     public Button backBtn;

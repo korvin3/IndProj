@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Roman Kolesnik on 22.05.2017.
+ * Created by Kristina Riadchenko on 22.05.2017.
  */
 public class GoodsReportGenerator {
 

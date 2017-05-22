@@ -25,7 +25,7 @@ import java.util.Arrays;
 import static lab.util.CommonUtils.print;
 
 /**
- * Created by Roman Kolesnik on 21.05.2017.
+ * Created by Kristina Riadchenko on 21.05.2017.
  */
 public class NewDeliveryController extends FXController {
     public ChoiceBox<Warehouse> warehouseCb;

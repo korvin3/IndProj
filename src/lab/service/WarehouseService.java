@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by Roman Kolesnik on 21.05.2017.
+ * Created by Kristina Riadchenko on 21.05.2017.
  */
 public class WarehouseService {
     public static ObservableList<Warehouse> findAll() {

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
 /**
- * Created by Roman Kolesnik on 21.05.2017.
+ * Created by Kristina Riadchenko on 21.05.2017.
  */
 public class FXController {
     private Stage stage;

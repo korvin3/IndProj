@@ -13,7 +13,7 @@ import java.sql.Statement;
 import static lab.util.CommonUtils.print;
 
 /**
- * Created by Roman Kolesnik on 21.05.2017.
+ * Created by Kristina Riadchenko on 21.05.2017.
  */
 public class AgentService {
     public static ObservableList<Agent> findAll() {
