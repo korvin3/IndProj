@@ -1,14 +1,17 @@
 package lab.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import lab.DeliveryStatus;
 import lab.View;
 import lab.datalayer.Delivery;
 import lab.service.DeliveryService;
 import lab.util.FXUtils;
+
+import java.time.LocalDate;
+import java.util.Arrays;
 
 /**
  * Created by Roman Kolesnik on 22.05.2017.
@@ -22,9 +25,15 @@ public class DeliveriesController extends FXController {
     public TableColumn<Delivery, Integer> quantityColumn;
     public TableColumn<Delivery, String> driverColumn;
     public TableColumn<Delivery, String> statusColumn;
+    public TableColumn<Delivery, String> deliveryTimeColumn;
     public TableView<Delivery> deliveriesTableView;
     public Button deliverBtn;
     public Button cancelBtn;
+    public ChoiceBox<DeliveryStatus> filterStatusCb;
+    public Button filterBtn;
+    public Button resetFilterBtn;
+    public DatePicker dateFromDp;
+    public DatePicker dateToDp;
 
     private Delivery selectedDelivery;
 
@@ -39,6 +48,7 @@ public class DeliveriesController extends FXController {
         quantityColumn.setCellValueFactory(cellData -> cellData.getValue().quantityProperty().asObject());
         driverColumn.setCellValueFactory(cellData -> cellData.getValue().driverProperty());
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        deliveryTimeColumn.setCellValueFactory(cellData -> cellData.getValue().deliveryTimeProperty());
 
         deliveriesTableView.setItems(DeliveryService.findAll());
         deliveriesTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -52,6 +62,14 @@ public class DeliveriesController extends FXController {
                 }
             }
         });
+
+        ObservableList<DeliveryStatus> deliveryTypes
+                = FXCollections.observableArrayList(Arrays.asList(DeliveryStatus.values()));
+        filterStatusCb.setItems(deliveryTypes);
+        filterStatusCb.getSelectionModel().select(0);
+
+        dateFromDp.setValue(LocalDate.now().minusDays(1));
+        dateToDp.setValue(LocalDate.now());
     }
 
     private void enableButtons() {
@@ -78,5 +96,14 @@ public class DeliveriesController extends FXController {
         DeliveryService.cancelDelivery(selectedDelivery);
         selectedDelivery.statusProperty().setValue(DeliveryStatus.Canceled.toString());
         disableButtons();
+    }
+
+    public void applyFilter(ActionEvent actionEvent) {
+        DeliveryStatus status = filterStatusCb.getValue();
+        deliveriesTableView.setItems(DeliveryService.find(status, dateFromDp.getValue(), dateToDp.getValue()));
+    }
+
+    public void resetFilter(ActionEvent actionEvent) {
+        deliveriesTableView.setItems(DeliveryService.findAll());
     }
 }

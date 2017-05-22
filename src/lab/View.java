@@ -4,6 +4,12 @@ package lab;
  * Created by Roman Kolesnik on 21.05.2017.
  */
 public enum View {
+    Agents {
+        @Override
+        public String getPath() {
+            return "/view/agents.fxml";
+        }
+    },
     Deliveries {
         @Override
         public String getPath() {

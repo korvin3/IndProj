@@ -12,12 +12,14 @@ import lab.View;
 import lab.datalayer.Agent;
 import lab.datalayer.Good;
 import lab.datalayer.Warehouse;
+import lab.exception.DatabaseError;
 import lab.service.AgentService;
 import lab.service.DeliveryService;
 import lab.service.GoodService;
 import lab.service.WarehouseService;
 import lab.util.FXUtils;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 
 import static lab.util.CommonUtils.print;
@@ -65,7 +67,8 @@ public class NewDeliveryController extends FXController {
         agentCb.setItems(agents);
         agentCb.getSelectionModel().select(0);
 
-        ObservableList<DeliveryType> deliveryTypes = FXCollections.observableArrayList(Arrays.asList(DeliveryType.values()));
+        ObservableList<DeliveryType> deliveryTypes
+                = FXCollections.observableArrayList(Arrays.asList(DeliveryType.values()));
         typeCb.setItems(deliveryTypes);
         typeCb.getSelectionModel().select(0);
     }
@@ -77,29 +80,30 @@ public class NewDeliveryController extends FXController {
         } catch (IllegalArgumentException e) {
             return;
         }
-        DeliveryService.createNewDelivery(goodCb.getValue().getNomenclature(),
-                agentCb.getValue().getName(),
-                warehouseCb.getValue().getName(),
-                typeCb.getValue().value(),
-                toInt(quantityTf.getText()),
-                driverTf.getText(),
-                toInt(priceTf.getText()),
-                deliveryTimeTf.getText());
+        try {
+            DeliveryService.createNewDelivery(goodCb.getValue().getNomenclature(),
+                    agentCb.getValue().getName(),
+                    warehouseCb.getValue().getName(),
+                    typeCb.getValue().value(),
+                    toInt(quantityTf.getText()),
+                    driverTf.getText(),
+                    toInt(priceTf.getText()),
+                    deliveryTimeTf.getText());
+        } catch (DatabaseError e) {
+            SQLException cause = (SQLException) e.getCause();
+            if (cause.toString().contains("QUANTITYISLESS")) { //ugly ugly
+                new Alert(Alert.AlertType.WARNING, "provided quantity is too big").show();
+                quantityTf.requestFocus();
+                return;
+            } else throw e;
+        }
         FXUtils.setCurrentView(View.Deliveries);
     }
 
     private void checkQuantity() {
-        if (DeliveryType.FromWarehouse == typeCb.getValue()) {
-            Warehouse warehouse = warehouseCb.getValue();
-            Good good = goodCb.getValue();
-            int remainingQuantity = WarehouseService.findGoodsQuantity(warehouse, good);
-            int deliverQuantity = toInt(quantityTf.getText());
-            if (deliverQuantity > remainingQuantity) {
-                String msg = "delivery quantity is invalid\n"
-                        + "remaining quantity is " + remainingQuantity;
-                new Alert(Alert.AlertType.WARNING, msg).show();
-                throw new IllegalArgumentException("invalid quantity (too big)");
-            }
+        int deliverQuantity = toInt(quantityTf.getText());
+        if (deliverQuantity == 0) {
+            new Alert(Alert.AlertType.WARNING, "quantity shouldn't be 0").show();
         }
     }
 

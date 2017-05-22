@@ -33,6 +33,7 @@ public class WarehouseService {
         }
     }
 
+    @Deprecated
     public static int findGoodsQuantity(Warehouse warehouse, Good good) {
         try {
             String query = "select QUANTITY from GOODS_WH where ID_WH=? and ID_GOODS=?";

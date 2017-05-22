@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.sql.Timestamp;
+
 /**
  * Created by Korvin on 13.05.2017.
  */
@@ -17,9 +19,10 @@ public class Delivery {
     private final IntegerProperty quantity;
     private final StringProperty driver;
     private final StringProperty status;
+    private final StringProperty deliveryTime;
 
     public Delivery(int _id, String _good, String _agent, String _warehouse, String _type,
-                    int _quantity, String _driver, String _status) {
+                    int _quantity, String _driver, String _status, Timestamp _deliveryTime) {
         id = new SimpleIntegerProperty(_id);
         good = new SimpleStringProperty(_good);
         agent = new SimpleStringProperty(_agent);
@@ -28,6 +31,7 @@ public class Delivery {
         quantity = new SimpleIntegerProperty(_quantity);
         driver = new SimpleStringProperty(_driver);
         status = new SimpleStringProperty(_status);
+        deliveryTime = new SimpleStringProperty(_deliveryTime == null ? null : _deliveryTime.toString());
     }
 
     public int getId() {
@@ -92,5 +96,13 @@ public class Delivery {
 
     public StringProperty statusProperty() {
         return status;
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime.get();
+    }
+
+    public StringProperty deliveryTimeProperty() {
+        return deliveryTime;
     }
 }

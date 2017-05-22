@@ -8,10 +8,8 @@ import lab.datalayer.Database;
 import lab.datalayer.Delivery;
 import lab.exception.DatabaseError;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDate;
 
 import static lab.util.CommonUtils.print;
 
@@ -27,7 +25,6 @@ public class DeliveryService {
             ResultSet rs = statement.executeQuery("select * from VIEW_DELIVERIES");
             while (rs.next()) {
                 print("Cпасибо, Олег Анатольевич");
-
                 String operationType = rs.getString("TYPEOP");
                 DeliveryType deliveryType = DeliveryType.fromValue(operationType);
                 operationType = deliveryType.toString();
@@ -43,8 +40,8 @@ public class DeliveryService {
                         operationType,
                         rs.getInt("QUANTITY"),
                         rs.getString("driver").trim(),
-                        stat
-                ));
+                        stat,
+                        rs.getTimestamp("ARR_DATE")));
             }
         } catch (SQLException e) {
             System.out.println("SQLException " + e.getMessage());
@@ -92,5 +89,31 @@ public class DeliveryService {
         } catch (SQLException e) {
             throw new DatabaseError(e);
         }
+    }
+
+    public static ObservableList<Delivery> find(DeliveryStatus status, LocalDate dateFrom, LocalDate dateTo) {
+        ObservableList<Delivery> deliveries = FXCollections.observableArrayList();
+        try {
+            String query = "{call get_deliveries_by_status(?,?,?)}";
+            PreparedStatement ps = Database.getInstance().getConnection().prepareStatement(query);
+            ps.setTimestamp(1, Timestamp.valueOf(dateFrom.atStartOfDay()));
+            ps.setTimestamp(2, Timestamp.valueOf(dateTo.atStartOfDay()));
+            ps.setString(3, status.value());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                deliveries.add(new Delivery(rs.getInt("ID"),
+                        rs.getString("NOMENCLATURE"),
+                        rs.getString("NAME_AG"),
+                        rs.getString("NAME"),
+                        null,
+                        rs.getInt("quantity"),
+                        rs.getString("DRIVER"),
+                        status.toString(),
+                        rs.getTimestamp("ARR_DATE")));
+            }
+        } catch (SQLException e) {
+            throw new DatabaseError(e);
+        }
+        return deliveries;
     }
 }

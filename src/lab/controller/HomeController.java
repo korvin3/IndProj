@@ -24,6 +24,7 @@ public class HomeController extends FXController {
     }
 
     public void showAgents(ActionEvent actionEvent) {
+        FXUtils.setCurrentView(View.Agents);
     }
 
     public void showMain(ActionEvent actionEvent) {

@@ -29,11 +29,6 @@
                         <Insets top="5.0" />
                     </VBox.margin>
                 </Button>
-            <Button fx:id="mainDevBtn" mnemonicParsing="false" onAction="#showMain" prefHeight="30.0" prefWidth="150.0" text="Main (DEV)">
-               <VBox.margin>
-                  <Insets top="15.0" />
-               </VBox.margin>
-            </Button>
             </children>
         </VBox>
     </center>
