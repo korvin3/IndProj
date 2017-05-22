@@ -9,27 +9,27 @@
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="newOrderBtn" mnemonicParsing="false" onAction="#showNewOrder" prefHeight="30.0" prefWidth="150.0" text="New delivery">
+                <Button fx:id="newOrderBtn" mnemonicParsing="false" onAction="#showNewOrder" prefHeight="30.0" prefWidth="150.0" text="Новая доставка">
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="deliveriesBtn" mnemonicParsing="false" onAction="#showDeliveries" prefHeight="30.0" prefWidth="150.0" text="Deliveries">
+                <Button fx:id="deliveriesBtn" mnemonicParsing="false" onAction="#showDeliveries" prefHeight="30.0" prefWidth="150.0" text="Доставки">
                     <VBox.margin>
                         <Insets top="5.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="goodsBtn" mnemonicParsing="false" onAction="#showGoods" prefHeight="30.0" prefWidth="150.0" text="Goods">
+                <Button fx:id="goodsBtn" mnemonicParsing="false" onAction="#showGoods" prefHeight="30.0" prefWidth="150.0" text="Товары">
                     <VBox.margin>
                         <Insets top="15.0" />
                     </VBox.margin>
                 </Button>
-                <Button fx:id="agentsBtn" mnemonicParsing="false" onAction="#showAgents" prefHeight="30.0" prefWidth="150.0" text="Agents">
+                <Button fx:id="agentsBtn" mnemonicParsing="false" onAction="#showAgents" prefHeight="30.0" prefWidth="150.0" text="Поставщики">
                     <VBox.margin>
                         <Insets top="5.0" />
                     </VBox.margin>
                 </Button>
-            <Button fx:id="generateReportBtn" mnemonicParsing="false" onAction="#generateGoodsReport" prefHeight="30.0" prefWidth="150.0" text="Generate goods report">
+            <Button fx:id="generateReportBtn" mnemonicParsing="false" onAction="#generateGoodsReport" prefHeight="60.0" prefWidth="150.0" text="Сформировать отчет о товарах" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>

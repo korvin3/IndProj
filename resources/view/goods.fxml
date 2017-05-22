@@ -13,8 +13,8 @@
          <center>
             <TableView fx:id="goodsTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="nomenclatureTc" prefWidth="150.0" text="Nomenclature" />
-                <TableColumn fx:id="measureTc" prefWidth="100.0" text="Measure" />
+                <TableColumn fx:id="nomenclatureTc" prefWidth="150.0" text="Название товара" />
+                <TableColumn fx:id="measureTc" prefWidth="100.0" text="Мера" />
               </columns>
             </TableView>
          </center></BorderPane>
@@ -22,7 +22,7 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="&lt;- Back" />
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="&lt;- Назад" />
          </children>
          <padding>
             <Insets left="5.0" />

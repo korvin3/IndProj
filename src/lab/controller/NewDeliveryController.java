@@ -91,11 +91,11 @@ public class NewDeliveryController extends FXController {
                     deliveryTimeTf.getText());
         } catch (DatabaseError e) {
             SQLException cause = (SQLException) e.getCause();
-            if (cause.toString().contains("QUANTITYISLESS")) { //ugly ugly
+            if (cause.toString().contains("QUANTITYISLESS")) { //ugly ugly (but works!)
                 new Alert(Alert.AlertType.WARNING, "provided quantity is too big").show();
                 quantityTf.requestFocus();
                 return;
-            } else if (cause.toString().contains("GOODNOTFOUND")) {
+            } else if (cause.toString().contains("GOODNOTFOUND")) { //ugly ugly
                 new Alert(Alert.AlertType.WARNING, "warehouse doesn't have such goods").show();
                 goodCb.requestFocus();
                 return;
@@ -108,6 +108,7 @@ public class NewDeliveryController extends FXController {
         int deliverQuantity = toInt(quantityTf.getText());
         if (deliverQuantity == 0) {
             new Alert(Alert.AlertType.WARNING, "quantity shouldn't be 0").show();
+            throw new IllegalArgumentException("quantity cannot be 0");
         }
     }
 
@@ -131,7 +132,7 @@ public class NewDeliveryController extends FXController {
     }
 
     private void checkIsFilled(String fieldName, TextField textField) {
-        if (textField.getText() == null) {
+        if (textField.getText() == null || textField.getText().equals("")) {
             textField.requestFocus();
             print(fieldName + " is not filled");
             throw new IllegalArgumentException(fieldName + " is not filled");

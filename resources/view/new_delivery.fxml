@@ -30,37 +30,37 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Warehouse" GridPane.halignment="LEFT">
+                <Label text="Склад" GridPane.halignment="LEFT">
                     <padding>
                         <Insets left="100.0" />
                     </padding>
                 </Label>
-                <Label text="Good" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                <Label text="Товар" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                     <padding>
                         <Insets left="100.0" />
                     </padding>
                 </Label>
-                <Label text="Agent" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                <Label text="Поставщик" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                     <padding>
                         <Insets left="100.0" />
                     </padding>
                 </Label>
-                <Label text="Type" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                <Label text="Тип" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                     <padding>
                         <Insets left="100.0" />
                     </padding>
                 </Label>
-                <Label text="Quantity" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+                <Label text="Количество" GridPane.halignment="LEFT" GridPane.rowIndex="4">
                     <padding>
                         <Insets left="100.0" />
                     </padding>
                 </Label>
-                <Label text="Driver" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+                <Label text="Водитель" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                     <padding>
                         <Insets left="100.0" />
                     </padding>
                 </Label>
-                <Label text="Price" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+                <Label text="Цена" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                     <padding>
                         <Insets left="100.0" />
                     </padding>
@@ -72,8 +72,8 @@
                 <TextField fx:id="quantityTf" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <TextField fx:id="driverTf" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <TextField fx:id="priceTf" maxWidth="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <Button fx:id="createBtn" minHeight="40.0" mnemonicParsing="false" onAction="#createDelivery" prefWidth="100.0" text="Create" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label text="Delivery time" GridPane.rowIndex="7">
+                <Button fx:id="createBtn" minHeight="40.0" mnemonicParsing="false" onAction="#createDelivery" prefWidth="100.0" text="Создать" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label prefHeight="50.0" text="Ожидаемое время доставки" wrapText="true" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin>
@@ -85,7 +85,7 @@
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="&lt;- Back" />
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="&lt;- Назад" />
             </children>
             <padding>
                 <Insets left="5.0" />

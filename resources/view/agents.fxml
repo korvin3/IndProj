@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="lab.controller.AgentsController">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lab.controller.AgentsController">
     <center>
-        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="agentsTableView">
+        <TableView fx:id="agentsTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="nameTc" prefWidth="75.0" text="Name"/>
-                <TableColumn fx:id="townTc" prefWidth="75.0" text="Town"/>
-                <TableColumn fx:id="phoneTc" prefWidth="75.0" text="Phone"/>
-                <TableColumn fx:id="payTc" prefWidth="75.0" text="Pay"/>
+                <TableColumn fx:id="nameTc" prefWidth="75.0" text="Имя" />
+                <TableColumn fx:id="townTc" prefWidth="75.0" text="Город" />
+                <TableColumn fx:id="phoneTc" prefWidth="75.0" text="Телефон" />
+                <TableColumn fx:id="payTc" prefWidth="75.0" text="Стоимость" />
             </columns>
         </TableView>
     </center>
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="&lt;- Back"/>
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="&lt;- Назад" />
             </children>
             <padding>
-                <Insets left="5.0"/>
+                <Insets left="5.0" />
             </padding>
         </HBox>
     </top>

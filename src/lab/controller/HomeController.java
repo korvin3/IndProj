@@ -20,12 +20,6 @@ public class HomeController extends FXController {
     public Button deliveriesBtn;
     public Button generateReportBtn;
 
-    @Override
-    public void initialize() {
-        super.initialize();
-        GoodsReportGenerator.generate();
-    }
-
     public void showNewOrder(ActionEvent actionEvent) {
         FXUtils.setCurrentView(View.NewDelivery);
     }
@@ -51,5 +45,8 @@ public class HomeController extends FXController {
         fileChooser.setInitialFileName("report.csv");
         fileChooser.setTitle("Report file name");
         File file = fileChooser.showSaveDialog(getStage());
+        if (file != null) {
+            GoodsReportGenerator.generateReport(file);
+        }
     }
 }
